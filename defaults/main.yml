@@ -1,0 +1,5 @@
+---
+# Variável que recebe os IPs/DNSs dos servidores NTP.
+# Informar um abaixo do outro.
+ntp_servers:
+  - pool.ntp.br

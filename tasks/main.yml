@@ -1,0 +1,23 @@
+---
+- name: Instalando os pacotes necessários.
+  yum:
+    name: "{{ item }}"
+    state: present
+    update_cache: yes
+  loop:
+    - ntp
+
+- name: Inicializando serviço.
+  systemd:
+    name: ntpd.service
+    state: started
+    enabled: yes
+
+- name: Ajustando o arquivo ntp.conf.
+  template:
+    src: ntp.conf.j2
+    dest: /etc/ntp.conf
+    owner: root
+    group: root
+    mode: 0644
+  notify: restart ntpd
